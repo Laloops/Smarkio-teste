@@ -1,31 +1,42 @@
 const express = require('express');
 const app = express();
-const handlebars = require('express-handlebars');
+const path = require('path');
 
-app.engine('handlebars', handlebars({defaultLayout: 'index'}))
-app.set('view engine', 'handlebars')
+app.use(express.static('public'));
 
 // rotas
 app.get('/', (req, res) => {
+    return res.sendFile(path.join(__dirname, './public','index.html'));
+});
 
+app.get('/audio/:id', (req, res) => {
+    return res.send('Escutar áudio' + req.params.id)
+});
+
+app.get('/comentario', (req, res) => {
     const data = [
         {
             texto:'Comentario 1',
             id:1
         },
         {
-            texto:'Comentário 2',
+            texto:'Lorem ipsum bli bli bli bla bla bla bla blo blu',
+            id:2
+        },
+        {
+            texto:'Comentário 3',
+            id:2
+        },
+        {
+            texto:'Comentário 4',
+            id:2
+        },
+        {
+            texto:'Comentário 4',
             id:2
         }
     ]
-
-    return res.render('comentarios', {lista:data});
-
-});
-
-
-app.get('/audio/:id', (req, res) => {
-    return res.send('Escutar áudio' + req.params.id)
+    res.send(data);
 });
 
 app.post('/comentario', (req, res) => {

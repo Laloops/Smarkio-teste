@@ -1,11 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/index.css" rel="stylesheet">
+    <title>Página de comentários</title>
 </head>
+
 <body>
-    Olá mundo
+    <div class="container-fluid">
+        <div class="row conteudo">
+            <div class="box-comentarios col-md-6">
+                <div class="titulo">
+                    Comentário
+                </div>
+                <textarea id="coment" name="coment" rows="5" cols="50"
+                    placeholder="Digite seu comentário aqui..."></textarea>
+                <button id="format-button" type="submit">Enviar</button>
+            </div>
+            <div class="lista-comentarios col-md-6">
+                <div class="titulo">
+                    Comentários
+                </div>
+                <div class="scroll-lista">
+                    {{#each lista}}
+                    <div class="linha-comentario">
+                        <div class="fonte-coment"> {{texto}} </div> {{id}}
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
 </body>
+<script>
+    const carregarComentarios = function () {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log( this.responseText);
+    }
+  };
+        xhttp.open("GET", "http://localhost:3000/comentario", true);
+        xhttp.send();
+    }
+    document.addEventListener("DOMContentLoaded", function (event) {
+        carregarComentarios()
+    });
+</script>
+
 </html>
