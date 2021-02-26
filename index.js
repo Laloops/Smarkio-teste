@@ -1,11 +1,14 @@
 const express = require('express');
-
 const app = express();
+const handlebars = require('express-handlebars');
+
+app.engine('handlebars', handlebars({defaultLayout: 'index'}))
+app.set('view engine', 'handlebars')
 
 // rotas
 app.get('/', (req, res) => {
 
-    const comentarios = [
+    const data = [
         {
             texto:'Comentario 1',
             id:1
@@ -16,13 +19,13 @@ app.get('/', (req, res) => {
         }
     ]
 
-    return res.send(comentarios);
+    return res.render('comentarios', {lista:data});
 
 });
 
 
 app.get('/audio/:id', (req, res) => {
-    return res.send('Escutar áudio')
+    return res.send('Escutar áudio' + req.params.id)
 });
 
 app.post('/comentario', (req, res) => {
