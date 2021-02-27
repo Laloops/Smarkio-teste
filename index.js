@@ -1,7 +1,12 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-var bodyParser = require('body-parser')
+const db = require("./db");
+
+
+
+
+var bodyParser = require('body-parser');
 
 app.use(express.static('public'));
 app.use(bodyParser.json())
@@ -14,37 +19,16 @@ app.get('/audio/:id', (req, res) => {
     return res.send('Escutar áudio' + req.params.id)
 });
 
-app.get('/comentario', (req, res) => {
-    const data = [
-        {
-            texto:'Comentario 1',
-            id:1
-        },
-        {
-            texto:'Lorem ipsum bli bli bli bla bla bla bla blo blu',
-            id:2
-        },
-        {
-            texto:'Comentário 3',
-            id:2
-        },
-        {
-            texto:'Comentário 4',
-            id:2
-        },
-        {
-            texto:'Comentário 4',
-            id:2
-        }
-    ]
+app.get('/comentario', async (req, res) => {
+    const mensagens = await db.selectMensagens();
     console.log('get comentarios')
-    res.send(data);
+    res.send(mensagens);
 });
 
-app.post('/comentario', (req, res) => {
+app.post('/comentario', async (req, res) => {
     console.log('cadastro comentario')
     let mensagem = req.body.mensagem; 
-    console.log(mensagem)
+    await db.insertMensagens(mensagem)
     return res.send('Cadastra comentário')
 });
 

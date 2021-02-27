@@ -16,7 +16,7 @@
                 <div class="titulo">
                     Comentário
                 </div>
-                <textarea id="coment" name="coment" rows="5" cols="50"
+                <textarea id="coment" name="coment" rows="5" cols="50" maxlength="255"
                     placeholder="Digite seu comentário aqui..."></textarea>
                 <button id="format-button" type="submit">Enviar</button>
             </div>
@@ -26,7 +26,11 @@
                 </div>
                 <div class="scroll-lista">
                     <div class="linha-comentario">
-                        <div class="fonte-coment" id="comentario-digitado"> </div>
+                        <div class="fonte-coment" id="comentario-digitado">
+                            <div class="card-coment">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -42,22 +46,20 @@
             document.getElementById('coment').value = "";
             capturando = "";
             carregarComentarios();
-            alert("Mensagem cadastrada!")
-
         } else if (xhttp.readyState == 4 && (xhttp.status != 201 || xhttp.status != 200)) {
             alert("errou");
         }
     }
     const respostaBuscaMensagem = function () {
         if (xhttp.readyState == 4 && (xhttp.status == 201 || xhttp.status == 200)) {
-            alert("Mensagem buscou!")
             let data = JSON.parse(xhttp.response);
-            data.forEach(element => {
-                document.getElementById('comentario-digitado').innerHTML += "<b>" + element.texto +
-                    "</b> <br>";
-            });
+            // document.getElementById('comentario-digitado').innerHTML = ""
+            //  data.forEach(element => {
+            //     document.getElementById('comentario-digitado').innerHTML += "<div>" + element.texto +
+            //        "</div> <br>";
+            //  });
         } else if (xhttp.readyState == 4 && (xhttp.status != 201 || xhttp.status != 200)) {
-            alert("errou");
+            alert("Ocorreu um erro");
         }
     }
     const carregarComentarios = function () {
@@ -90,7 +92,11 @@
 
     function sndMsg() {
         capturar();
-        cadastrarComentarios();
+        if (capturando.length <= 255) {
+            cadastrarComentarios();
+        } else {
+            alert("Você ultrapassou o limite máximo de caracteres...")
+        }
     }
     document.getElementById("format-button").addEventListener("click", sndMsg)
 </script>
