@@ -25,11 +25,9 @@
                     Comentários
                 </div>
                 <div class="scroll-lista">
-                    {{#each lista}}
                     <div class="linha-comentario">
-                        <div class="fonte-coment"> {{texto}} </div> {{id}}
+                        <div class="fonte-coment" id="comentario-digitado"> </div>
                     </div>
-                    {{/each}}
                 </div>
             </div>
         </div>
@@ -37,19 +35,64 @@
     </div>
 </body>
 <script>
-    const carregarComentarios = function () {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      console.log( this.responseText);
+    var xhttp = new XMLHttpRequest();
+
+    const respostaCadastraMensagem = function () {
+        if (xhttp.readyState == 4 && (xhttp.status == 201 || xhttp.status == 200)) {
+            document.getElementById('coment').value = "";
+            capturando = "";
+            carregarComentarios();
+            alert("Mensagem cadastrada!")
+
+        } else if (xhttp.readyState == 4 && (xhttp.status != 201 || xhttp.status != 200)) {
+            alert("errou");
+        }
     }
-  };
+    const respostaBuscaMensagem = function () {
+        if (xhttp.readyState == 4 && (xhttp.status == 201 || xhttp.status == 200)) {
+            alert("Mensagem buscou!")
+            let data = JSON.parse(xhttp.response);
+            data.forEach(element => {
+                document.getElementById('comentario-digitado').innerHTML += "<b>" + element.texto +
+                    "</b> <br>";
+            });
+        } else if (xhttp.readyState == 4 && (xhttp.status != 201 || xhttp.status != 200)) {
+            alert("errou");
+        }
+    }
+    const carregarComentarios = function () {
         xhttp.open("GET", "http://localhost:3000/comentario", true);
+        xhttp.onload = respostaBuscaMensagem
+        xhttp.onerror = respostaBuscaMensagem
         xhttp.send();
     }
+    const cadastrarComentarios = function () {
+        var data = {
+            'mensagem': capturando
+        }
+        xhttp.open("POST", "http://localhost:3000/comentario", true);
+        xhttp.onload = respostaCadastraMensagem
+        xhttp.onerror = respostaCadastraMensagem
+        xhttp.setRequestHeader('Content-Type', 'application/json');
+        xhttp.send(JSON.stringify(data));
+    }
+
     document.addEventListener("DOMContentLoaded", function (event) {
-        carregarComentarios()
+        carregarComentarios();
     });
+
+    var capturando = "";
+
+    function capturar() {
+        capturando = document.getElementById('coment').value;
+    }
+
+
+    function sndMsg() {
+        capturar();
+        cadastrarComentarios();
+    }
+    document.getElementById("format-button").addEventListener("click", sndMsg)
 </script>
 
 </html>

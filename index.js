@@ -1,9 +1,10 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+var bodyParser = require('body-parser')
 
 app.use(express.static('public'));
-
+app.use(bodyParser.json())
 // rotas
 app.get('/', (req, res) => {
     return res.sendFile(path.join(__dirname, './public','index.html'));
@@ -36,10 +37,14 @@ app.get('/comentario', (req, res) => {
             id:2
         }
     ]
+    console.log('get comentarios')
     res.send(data);
 });
 
 app.post('/comentario', (req, res) => {
+    console.log('cadastro comentario')
+    let mensagem = req.body.mensagem; 
+    console.log(mensagem)
     return res.send('Cadastra comentário')
 });
 
