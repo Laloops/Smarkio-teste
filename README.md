@@ -63,8 +63,7 @@ Trocar os endereços (LOCALHOST) existentes, pelos endereços do servidor onde o
 * [IBMWatson] (https://www.ibm.com/br-pt/watson) - API de conversão de texto para voz
 
 
-
-## Autores
+## Autor
 
 * ** Camila Lopes ** - [Laloops] (https://github.com/Laloops)
 
