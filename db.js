@@ -1,10 +1,14 @@
+const user = 'root'
+const password = 'deltaloops777'
+
 async function connect() {
   if (global.connection && global.connection.state !== "Disconected")
     return global.connection;
   const mysql = require("mysql2/promise");
   const connection = await mysql.createConnection(
-    "mysql://root:deltaloops777@localhost:3306/smarkio"
+    "mysql://"+user+":"+password+"@localhost:3306/smarkio"
   );
+
   console.log("Conectou no MySQL!");
   global.connection = connection;
   return connection;
