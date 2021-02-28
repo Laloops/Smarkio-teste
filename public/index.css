@@ -95,62 +95,9 @@ html {
 }
 
 
-/*Botão enviar mensagem*/
+/*Botão enviar mensagem e ouvir áudio configurações gerais*/
 
-
-#format-button {
-    -moz-box-shadow: inset 0px 1px 0px 0px #f9d4ff;
-    -webkit-box-shadow: inset 0px 1px 0px 0px #f9d4ff;
-    box-shadow: inset 0px 1px 0px 0px #f9d4ff;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #c7ceff), color-stop(1, #468ccf));
-    background: -moz-linear-gradient(center top, #c7ceff 5%, #468ccf 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#c7ceff', endColorstr='#468ccf');
-    background-color: #c7ceff;
-    -webkit-border-top-left-radius: 6px;
-    -moz-border-radius-topleft: 6px;
-    border-top-left-radius: 6px;
-    -webkit-border-top-right-radius: 6px;
-    -moz-border-radius-topright: 6px;
-    border-top-right-radius: 6px;
-    -webkit-border-bottom-right-radius: 6px;
-    -moz-border-radius-bottomright: 6px;
-    border-bottom-right-radius: 6px;
-    -webkit-border-bottom-left-radius: 6px;
-    -moz-border-radius-bottomleft: 6px;
-    border-bottom-left-radius: 6px;
-    text-indent: 0;
-    border: 1px solid #3866a3;
-    display: inline-block;
-    color: #2d5385;
-    font-family: arial;
-    font-size: 15px;
-    font-weight: bold;
-    font-style: normal;
-    height: 39px;
-    line-height: 39px;
-    width: 40vw;
-    text-decoration: none;
-    text-align: center;
-    text-shadow: 0px 1px 0px #7cacde;
-    margin-top: 3%;
-}
-
-#format-button:hover {
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f9d4ff), color-stop(1, #63b8ee));
-    background: -moz-linear-gradient(center top, #f9d4ff 5%, #c7ceff 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9d4ff', endColorstr='#c7ceff');
-    background-color: #a4adf7;
-}
-
-#format-button:active {
-    position: relative;
-    top: 1px;
-
-}
-
-/*Botão ouvir áudio*/
-
-
+#format-button,
 .listen-button {
     -moz-box-shadow: inset 0px 1px 0px 0px #f9d4ff;
     -webkit-box-shadow: inset 0px 1px 0px 0px #f9d4ff;
@@ -179,16 +126,14 @@ html {
     font-size: 15px;
     font-weight: bold;
     font-style: normal;
-    height: 44px;
     line-height: 39px;
-    width: 15%;
     text-decoration: none;
     text-align: center;
     text-shadow: 0px 1px 0px #7cacde;
-    align-self: center;
-    margin: 3%;
+    margin-top: 3%;
 }
 
+#format-button:hover,
 .listen-button:hover {
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f9d4ff), color-stop(1, #63b8ee));
     background: -moz-linear-gradient(center top, #f9d4ff 5%, #c7ceff 100%);
@@ -196,10 +141,25 @@ html {
     background-color: #a4adf7;
 }
 
+#format-button:active,
 .listen-button:active {
     position: relative;
     top: 1px;
 
+}
+
+/*Botão enviar mensagem e ouvir áudio tamanhos e configurações unicas*/
+
+#format-button {
+    height: 39px;
+    width: 40vw;
+}
+
+.listen-button {
+    height: 44px;
+    width: 15%;
+    margin: 10px;
+    align-self: center;
 }
 
 /*scrollbar personalizado*/
