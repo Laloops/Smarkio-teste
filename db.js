@@ -35,6 +35,4 @@ async function insertMensagens(texto) {
   await conn.query(sql, values);
 }
 
-//insert into smarkio.mensagens (texto) VALUES ('Lorem ipsum dolor blablabla casa teste 123')
-
 module.exports = { selectMensagens, insertMensagens, selectMensagem };

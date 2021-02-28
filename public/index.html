@@ -35,7 +35,7 @@
                                         CSS.</span>
                                 </div>
                             </div>
-                            <div class="listen-button" onclick="audioListen(1)"><i class="fa fa-play-circle"></i>
+                            <div class="listen-button" onclick="this.audioListen(1)"><i class="fa fa-play-circle"></i>
                                 Ouvir</div>
                         </div>
                     </div>
@@ -44,98 +44,7 @@
         </div>
     </div>
     </div>
+    <script src="/script.js"></script>
 </body>
-<script>
-    var xhttp = new XMLHttpRequest();
-    var myAudio;
-    var capturando = "";
-
-    const respostaCadastraMensagem = function () {
-        if (xhttp.readyState == 4 && (xhttp.status == 201 || xhttp.status == 200)) {
-            document.getElementById('coment').value = "";
-            capturando = "";
-            carregarComentarios();
-        } else if (xhttp.readyState == 4 && (xhttp.status != 201 || xhttp.status != 200)) {
-            alert("Ocorreu um erro");
-        }
-    }
-    const respostaBuscaMensagem = function () {
-        if (xhttp.readyState == 4 && (xhttp.status == 201 || xhttp.status == 200)) {
-            let data = JSON.parse(xhttp.response);
-            document.getElementById('comentario-digitado').innerHTML = ""
-            data.forEach(element => {
-                document.getElementById('comentario-digitado').innerHTML +=
-                    "<div class='dialogbox'>" +
-                    "<div class='body'> " +
-                    "<span class='tip tip-right'></span>" +
-                    "<div class='message'>" +
-                    "<span>" + element.texto + "</span>" +
-                    "</div>" +
-                    "</div>" +
-                    "  <div class='listen-button' onclick='audioListen(" + element.id +
-                    ")'><i class='fa fa-play-circle'></i>" +
-                    " Ouvir</div>" +
-                    "</div>" +
-                    "</div>";
-            });
-        } else if (xhttp.readyState == 4 && (xhttp.status != 201 || xhttp.status != 200)) {
-            alert("Ocorreu um erro");
-        }
-    }
-    const carregarComentarios = function () {
-        xhttp.open("GET", "http://localhost:3000/comentario", true);
-        xhttp.onload = respostaBuscaMensagem
-        xhttp.onerror = respostaBuscaMensagem
-        xhttp.send();
-    }
-    const cadastrarComentarios = function () {
-        var data = {
-            'mensagem': capturando
-        }
-        xhttp.open("POST", "http://localhost:3000/comentario", true);
-        xhttp.onload = respostaCadastraMensagem
-        xhttp.onerror = respostaCadastraMensagem
-        xhttp.setRequestHeader('Content-Type', 'application/json');
-        xhttp.send(JSON.stringify(data));
-    }
-
-    document.addEventListener("DOMContentLoaded", function (event) {
-        carregarComentarios();
-    });
-
-    function capturar() {
-        capturando = document.getElementById('coment').value;
-    }
-
-    function valida_coment() {
-        if (capturando == "") {
-            alert('Por favor, escreva seu comentário');
-            document.getElementById('coment').focus();
-            return false
-        } else if (capturando.length > 255) {
-            alert("Você ultrapassou o limite máximo de caracteres...")
-            return false
-        } else {
-            return true
-        }
-    }
-
-    function sndMsg() {
-        capturar();
-        if (valida_coment()) {
-            cadastrarComentarios();
-        }
-    }
-    document.getElementById("format-button").addEventListener("click", sndMsg)
-
-    function audioListen(id) {
-        if (myAudio != undefined && myAudio.duration > 0 && !myAudio.paused) {
-            myAudio.pause();
-        } else {
-            myAudio = new Audio('http://localhost:3000/audio/' + id);
-            myAudio.play();
-        }
-    }
-</script>
 
 </html>
