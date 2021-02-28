@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Página de comentários</title>
 </head>
 
@@ -14,22 +15,28 @@
         <div class="row conteudo">
             <div class="box-comentarios col-md-6">
                 <div class="titulo">
-                    Comentário
+                    Escreva seu comentário abaixo...
                 </div>
-                <textarea id="coment" name="coment" rows="5" cols="50" maxlength="255"
+                <textarea id="coment" name="coment" " maxlength=" 255"
                     placeholder="Digite seu comentário aqui..."></textarea>
                 <button id="format-button" type="submit">Enviar</button>
             </div>
             <div class="lista-comentarios col-md-6">
                 <div class="titulo">
-                    Comentários
+                    Últimos comentários:
                 </div>
                 <div class="scroll-lista">
-                    <div class="linha-comentario">
-                        <div class="fonte-coment" id="comentario-digitado">
-                            <div class="card-coment">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+                    <div class="row" id="comentario-digitado">
+                        <div class="dialogbox">
+                            <div class="body">
+                                <span class="tip tip-right"></span>
+                                <div class="message">
+                                    <span>I just made a comment about this comment box which is purely made from
+                                        CSS.</span>
+                                </div>
+                            </div>
+                            <div class="listen-button" onclick="audioListen(1)"><i class="fa fa-play-circle"></i>
+                                Ouvir</div>
                         </div>
                     </div>
                 </div>
@@ -40,6 +47,8 @@
 </body>
 <script>
     var xhttp = new XMLHttpRequest();
+    var myAudio;
+    var capturando = "";
 
     const respostaCadastraMensagem = function () {
         if (xhttp.readyState == 4 && (xhttp.status == 201 || xhttp.status == 200)) {
@@ -47,17 +56,28 @@
             capturando = "";
             carregarComentarios();
         } else if (xhttp.readyState == 4 && (xhttp.status != 201 || xhttp.status != 200)) {
-            alert("errou");
+            alert("Ocorreu um erro");
         }
     }
     const respostaBuscaMensagem = function () {
         if (xhttp.readyState == 4 && (xhttp.status == 201 || xhttp.status == 200)) {
             let data = JSON.parse(xhttp.response);
-            // document.getElementById('comentario-digitado').innerHTML = ""
-            //  data.forEach(element => {
-            //     document.getElementById('comentario-digitado').innerHTML += "<div>" + element.texto +
-            //        "</div> <br>";
-            //  });
+            document.getElementById('comentario-digitado').innerHTML = ""
+            data.forEach(element => {
+                document.getElementById('comentario-digitado').innerHTML +=
+                    "<div class='dialogbox'>" +
+                    "<div class='body'> " +
+                    "<span class='tip tip-right'></span>" +
+                    "<div class='message'>" +
+                    "<span>" + element.texto + "</span>" +
+                    "</div>" +
+                    "</div>" +
+                    "  <div class='listen-button' onclick='audioListen(" + element.id +
+                    ")'><i class='fa fa-play-circle'></i>" +
+                    " Ouvir</div>" +
+                    "</div>" +
+                    "</div>";
+            });
         } else if (xhttp.readyState == 4 && (xhttp.status != 201 || xhttp.status != 200)) {
             alert("Ocorreu um erro");
         }
@@ -83,22 +103,39 @@
         carregarComentarios();
     });
 
-    var capturando = "";
-
     function capturar() {
         capturando = document.getElementById('coment').value;
     }
 
+    function valida_coment() {
+        if (capturando == "") {
+            alert('Por favor, escreva seu comentário');
+            document.getElementById('coment').focus();
+            return false
+        } else if (capturando.length > 255) {
+            alert("Você ultrapassou o limite máximo de caracteres...")
+            return false
+        } else {
+            return true
+        }
+    }
 
     function sndMsg() {
         capturar();
-        if (capturando.length <= 255) {
+        if (valida_coment()) {
             cadastrarComentarios();
-        } else {
-            alert("Você ultrapassou o limite máximo de caracteres...")
         }
     }
     document.getElementById("format-button").addEventListener("click", sndMsg)
+
+    function audioListen(id) {
+        if (myAudio != undefined && myAudio.duration > 0 && !myAudio.paused) {
+            myAudio.pause();
+        } else {
+            myAudio = new Audio('http://localhost:3000/audio/' + id);
+            myAudio.play();
+        }
+    }
 </script>
 
 </html>

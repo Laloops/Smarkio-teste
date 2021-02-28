@@ -1,6 +1,16 @@
+/*config global*/
+
 body,
 html {
     height: 100%;
+
+}
+
+.row,
+.container-fluid {
+    margin: 0;
+    padding: 0;
+    display: list-item;
 }
 
 .conteudo {
@@ -8,60 +18,85 @@ html {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    background-image: url("/images/19187761.jpg");
+    background-size: cover;
+
 }
+
+/*Formatação do título*/
 
 .titulo {
     writing-mode: horizontal-tb;
     justify-content: none;
     align-self: flex-start;
-    margin-bottom: 10%;
-    font-size: 2em;
+    margin-bottom: 5%;
+    font-size: 1.2em;
     font-family: fantasy;
+    width: 100%;
+    background: rgba(168, 129, 146, 0.425);
+    background: linear-gradient(160deg, rgba(168, 129, 146, 1) 0%, rgba(131, 159, 191, 0.500437675070028) 78%);
+    text-align: center;
+    color: #f9d4ff;
+    backdrop-filter: blur(10px);
+    text-transform: uppercase;
+    padding: 1%;
+}
+
+/*caixa e fonte do textarea de comentários*/
+
+
+#coment {
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    background-color: #b490b933;
+    width: 40vw;
+    height: 40vh;
+    color: rgb(255, 235, 244);
 
 }
 
 .fonte-coment {
     font-size: 1em;
     font-family: fantasy;
+    padding: 2%;
 }
 
+/*lista de comentários feitos*/
+
 .box-comentarios {
-    background-color: #FFF0F5;
     height: 100vh;
     writing-mode: vertical-lr;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    padding-top: 7%;
+    padding-top: 5%;
     border-right: 1px ridge rgb(58, 38, 63);
 }
 
 
-
 .lista-comentarios {
-    background-color: #FFF0F5;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    padding-top: 7%;
+    padding-top: 5%;
 
 }
 
 .scroll-lista {
-    background-color: #f9d4ffa4;
-    width: 450px;
-    height: 46vh;
+    background-color: #b490b933;
+    width: 90%;
+    height: 70vh;
     overflow: auto;
     border-radius: 10px;
+    backdrop-filter: blur(10px);
 }
 
-.linha-comentario {
-    background-color: whitesmoke;
-    margin: 10px;
-}
+
+/*Botão enviar mensagem*/
+
 
 #format-button {
     -moz-box-shadow: inset 0px 1px 0px 0px #f9d4ff;
@@ -93,10 +128,11 @@ html {
     font-style: normal;
     height: 39px;
     line-height: 39px;
-    width: 420px;
+    width: 40vw;
     text-decoration: none;
     text-align: center;
     text-shadow: 0px 1px 0px #7cacde;
+    margin-top: 3%;
 }
 
 #format-button:hover {
@@ -111,6 +147,63 @@ html {
     top: 1px;
 
 }
+
+/*Botão ouvir áudio*/
+
+
+.listen-button {
+    -moz-box-shadow: inset 0px 1px 0px 0px #f9d4ff;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #f9d4ff;
+    box-shadow: inset 0px 1px 0px 0px #f9d4ff;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #c7ceff), color-stop(1, #468ccf));
+    background: -moz-linear-gradient(center top, #c7ceff 5%, #468ccf 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#c7ceff', endColorstr='#468ccf');
+    background-color: #c7ceff;
+    -webkit-border-top-left-radius: 6px;
+    -moz-border-radius-topleft: 6px;
+    border-top-left-radius: 6px;
+    -webkit-border-top-right-radius: 6px;
+    -moz-border-radius-topright: 6px;
+    border-top-right-radius: 6px;
+    -webkit-border-bottom-right-radius: 6px;
+    -moz-border-radius-bottomright: 6px;
+    border-bottom-right-radius: 6px;
+    -webkit-border-bottom-left-radius: 6px;
+    -moz-border-radius-bottomleft: 6px;
+    border-bottom-left-radius: 6px;
+    text-indent: 0;
+    border: 1px solid #3866a3;
+    display: inline-block;
+    color: #2d5385;
+    font-family: arial;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    height: 44px;
+    line-height: 39px;
+    width: 15%;
+    text-decoration: none;
+    text-align: center;
+    text-shadow: 0px 1px 0px #7cacde;
+    align-self: center;
+    margin: 3%;
+}
+
+.listen-button:hover {
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f9d4ff), color-stop(1, #63b8ee));
+    background: -moz-linear-gradient(center top, #f9d4ff 5%, #c7ceff 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9d4ff', endColorstr='#c7ceff');
+    background-color: #a4adf7;
+}
+
+.listen-button:active {
+    position: relative;
+    top: 1px;
+
+}
+
+/*scrollbar personalizado*/
+
 
 ::-webkit-scrollbar {
     width: 13px;
@@ -130,4 +223,63 @@ html {
     background: #ffffff;
     border-radius: 10px;
     box-shadow: inset 7px 10px 12px #f0f0f0;
+
+}
+
+/*caixa de texto do comentário*/
+
+
+.tip {
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    background: transparent;
+    border: 10px solid #ccc;
+}
+
+.tip-right {
+    top: 10px;
+    right: -25px;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+}
+
+.dialogbox .body {
+    position: relative;
+    width: -webkit-fill-available;
+    height: auto;
+    margin: 20px 10px;
+    padding: 5px;
+    background-color: #DADADA;
+    border-radius: 3px;
+    border: 5px solid #ccc;
+}
+
+.dialogbox {
+    display: flex;
+
+}
+
+.body .message {
+    min-height: 30px;
+    border-radius: 3px;
+    font-family: Arial;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #797979;
+}
+
+/*cor do placeholder*/
+
+::-webkit-input-placeholder {
+    color: rgba(255, 255, 255, 0.116);
+}
+
+input:-moz-placeholder {
+    color: rgba(255, 255, 255, 0.116);
+}
+
+textarea:-moz-placeholder {
+    color: rgba(255, 255, 255, 0.116);
 }
