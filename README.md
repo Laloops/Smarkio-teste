@@ -53,8 +53,8 @@ http://localhost:3000/
 
 ## Desdobramento, desenvolvimento
 
-Para utilizar o sistema em produção, deve-se alterar o endereço da URL no arquivo index.html, linha 135. 
-Trocar o endereço existente, pelo endereço do servidor onde o sistema estará hospedado.
+Para utilizar o sistema em produção, deve-se alterar o endereço das URLs de acesso a API no arquivo index.html. 
+Trocar os endereços (LOCALHOST) existentes, pelos endereços do servidor onde o sistema estará hospedado.
 
 ## Construído com
 
