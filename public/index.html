@@ -17,7 +17,7 @@
                 <div class="titulo">
                     Escreva seu comentário abaixo...
                 </div>
-                <textarea id="coment" name="coment" " maxlength=" 255"
+                <textarea id="coment" name="coment" " maxlength="255"
                     placeholder="Digite seu comentário aqui..."></textarea>
                 <button id="format-button" type="submit">Enviar</button>
             </div>
@@ -46,5 +46,13 @@
     </div>
     <script src="/script.js"></script>
 </body>
+<script>
+var objeto = document.getElementById("coment");
 
+objeto.addEventListener('input', function(){
+    if(objeto.value.length == 255){
+        alert("Você atingiu o limite máximo de caracteres! \n (Limite máximo de 255 caracteres) ")
+    }
+})
+</script>
 </html>
